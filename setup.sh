@@ -100,7 +100,7 @@ echo ""
 ADMIN_PASSWORD=wordpress
 
 # https://wp-cli.org/commands/core/install/
-wp core install --url=$SITE_URL --title='$SITE_TITLE' --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL --skip-email
+wp core install --url=$SITE_URL --title="$SITE_TITLE" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL --skip-email
 
 # Update plugins to their latest version
 # wp plugin update --all
@@ -148,6 +148,7 @@ wp post create --post_type=page --post_status=publish --post_title='Contact'
 # Set static homepage 
 wp option update page_on_front 3
 wp option update page_for_posts 5
+wp option update show_on_front page
 
 # Don't organize my uploads into month- and year-based folders
 wp option update uploads_use_yearmonth_folders 0
@@ -171,13 +172,14 @@ echo ""
 echo "Changing directory and file permissions ..."
 echo ""
 cd ..
+
 # Directories
 # Change directory permissions rwxr-xr-x
 find $INSTALL_DIR -type d -exec chmod 755 {} \; 
+
 # Files
 # Change file permissions rw-r--r--
-find $INSTALL_DIR -type f -exec chmod 644 {} \; 
-chmod 600 $INSTALL_DIR/wp-config.php
+find $INSTALL_DIR -type f -exec chmod 644 {} \;
 
 # ###########################
 # Clean Up
